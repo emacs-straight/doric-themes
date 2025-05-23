@@ -5,7 +5,7 @@
 ;; Author: Protesilaos Stavrou <info@protesilaos.com>
 ;; Maintainer: Protesilaos Stavrou <info@protesilaos.com>
 ;; URL: https://github.com/protesilaos/doric-themes
-;; Version: 0.0.0
+;; Version: 0.0.1
 ;; Package-Requires: ((emacs "29.1"))
 ;; Keywords: faces, theme, accessibility
 
@@ -38,10 +38,20 @@
 (require 'seq)
 (eval-when-compile (require 'subr-x))
 
-(defconst doric-themes-light-themes '(doric-light doric-marble doric-earth doric-wind)
+(defconst doric-themes-light-themes
+  '(doric-cherry
+    doric-earth
+    doric-light
+    doric-marble
+    doric-wind)
   "Light themes.")
 
-(defconst doric-themes-dark-themes '(doric-dark doric-obsidian doric-fire doric-water)
+(defconst doric-themes-dark-themes
+  '(doric-dark
+    doric-fire
+    doric-plum
+    doric-obsidian
+    doric-water)
   "Dark themes.")
 
 (defconst doric-themes-collection
