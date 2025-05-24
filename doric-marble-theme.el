@@ -47,15 +47,15 @@
       (fg-main "#202020")
       (border "#9a9a9a")
 
-      (bg-shadow-subtle "#dedede")
+      (bg-shadow-subtle "#dfdfdf")
       (fg-shadow-subtle "#606060")
 
-      (bg-neutral "#cdcdcd")
+      (bg-neutral "#d5d5d5")
 
       (bg-shadow-intense "#b0b0b0")
       (fg-shadow-intense "#424242")
 
-      (bg-accent "#ded0bf")
+      (bg-accent "#e7dac6")
       (fg-accent "#673435")
 
       (fg-faint-red "#750000")

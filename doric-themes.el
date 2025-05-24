@@ -75,7 +75,7 @@ themes that form part of this collection."
                          (list 'const theme))
                        doric-themes-collection)))
           `(choice
-            (const :tag "No toggle (default)" nil)
+            (const :tag "No toggle" nil)
             (list :tag "Pick two themes to toggle between"
                   (choice :tag "Theme one of two" ,@themes)
                   (choice :tag "Theme two of two" ,@themes))))
@@ -274,7 +274,6 @@ is either the `dark' or `light' symbol."
 
 (defconst doric-themes-selection-faces
   '(calendar-today
-    company-tooltip-selection
     completions-highlight
     consult-highlight-mark
     consult-highlight-match
@@ -307,6 +306,7 @@ is either the `dark' or `light' symbol."
 (defconst doric-themes-intense-shadow-faces
   '(blink-matching-paren-offscreen
     company-template-field
+    company-tooltip-selection
     company-tooltip-scrollbar-thumb
     corfu-current
     custom-button
@@ -745,7 +745,6 @@ is either the `dark' or `light' symbol."
     org-archived
     org-default
     org-document-info
-    org-ellipsis
     org-inline-src-block
     org-latex-and-related
     org-mode-line-clock
@@ -1417,7 +1416,7 @@ is either the `dark' or `light' symbol."
             `(magit-section-highlight (( )))
 
             `(markdown-code-face ((t :inherit fixed-pitch :background ,bg-shadow-subtle :extend t)))
-            '(markdown-language-keyword-face ((t :inherit fixed-pitch)))
+            `(markdown-language-keyword-face ((t :inherit fixed-pitch :background ,bg-neutral)))
             '(markdown-table-face ((t :inherit fixed-pitch)))
 
             '(markup-meta-face ((t :inherit fixed-pitch)))
@@ -1442,7 +1441,7 @@ is either the `dark' or `light' symbol."
                  :overline ,fg-shadow-subtle)))
 
             `(org-block ((t :inherit fixed-pitch :background ,bg-shadow-subtle :extend t)))
-            `(org-block-begin-line ((t :inherit fixed-pitch :background ,bg-shadow-subtle :foreground ,fg-shadow-intense :extend t)))
+            `(org-block-begin-line ((t :inherit fixed-pitch :background ,bg-neutral :foreground ,fg-shadow-intense :extend t)))
             `(org-block-end-line ((t :inherit org-block-begin-line)))
             '(org-checkbox ((t :inherit fixed-pitch)))
             `(org-column-title ((t :inherit fixed-pitch :foreground ,fg-shadow-subtle)))
@@ -1452,6 +1451,7 @@ is either the `dark' or `light' symbol."
                 :box (:line-width (-1 . -1) :color ,fg-accent))))
             `(org-document-info-keyword ((t :inherit fixed-pitch :foreground ,fg-shadow-subtle)))
             `(org-drawer ((t :inherit fixed-pitch :foreground ,fg-shadow-subtle)))
+            `(org-ellipsis (( ))) ; inherits from the heading's color
             '(org-formula ((t :inherit fixed-pitch)))
             `(org-hide ((t :foreground ,bg-main)))
             `(org-indent ((t :inherit (fixed-pitch org-hide))))
