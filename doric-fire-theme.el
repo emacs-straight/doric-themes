@@ -42,21 +42,21 @@
     (require 'doric-themes))
 
   (defvar doric-fire-palette
-    '((cursor "#fe7062")
+    '((cursor "#e06e42")
       (bg-main "#2a281d")
       (fg-main "#f0e5e0")
       (border "#928a7e")
 
       (bg-shadow-subtle "#40332f")
-      (fg-shadow-subtle "#b0a8a0")
+      (fg-shadow-subtle "#9b9280")
 
       (bg-neutral "#493c37")
 
-      (bg-shadow-intense "#742d33")
-      (fg-shadow-intense "#cabbb8")
+      (bg-shadow-intense "#733930")
+      (fg-shadow-intense "#ceb29f")
 
-      (bg-accent "#533a18")
-      (fg-accent "#dfc880")
+      (bg-accent "#4e2a1f")
+      (fg-accent "#c0906f")
 
       (fg-faint-red "#d09090")
       (fg-faint-green "#85c397")
