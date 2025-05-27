@@ -49,8 +49,8 @@
 (defconst doric-themes-dark-themes
   '(doric-dark
     doric-fire
-    doric-plum
     doric-obsidian
+    doric-plum
     doric-water)
   "Dark themes.")
 
@@ -1141,8 +1141,6 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     tab-line-tab-special
     transient-key-noop
     vc-dir-status-edited
-    vc-edited-state
-    vc-locally-added-state
     vc-git-log-edit-summary-max-warning
     vc-git-log-edit-summary-target-warning
     which-key-docstring-face
@@ -1443,8 +1441,8 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
             `(mode-line
               ((default :background ,bg-shadow-intense :foreground ,fg-shadow-intense)
                (((supports :box t))
-                :box ,fg-shadow-subtle)
-               (t :underline ,fg-shadow-subtle)))
+                :box ,border)
+               (t :underline ,border)))
 
             `(mode-line-active ((t :inherit mode-line)))
             `(mode-line-inactive
@@ -1495,6 +1493,9 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
 
             '(telega-webpage-fixed ((t :inherit fixed-pitch)))
             '(telega-webpage-preformatted ((t :inherit fixed-pitch)))
+
+            `(vc-edited-state ((t :inherit italic)))
+            `(vc-locally-added-state ((t :inherit italic)))
 
             '(vtable ((t :inherit fixed-pitch)))
 

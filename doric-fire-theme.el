@@ -45,18 +45,18 @@
     '((cursor "#e06e42")
       (bg-main "#2a281d")
       (fg-main "#f0e5e0")
-      (border "#928a7e")
+      (border "#706061")
 
       (bg-shadow-subtle "#40332f")
       (fg-shadow-subtle "#afa497")
 
       (bg-neutral "#493c37")
 
-      (bg-shadow-intense "#733930")
-      (fg-shadow-intense "#dab8a4")
+      (bg-shadow-intense "#601a2f")
+      (fg-shadow-intense "#e2b0a4")
 
-      (bg-accent "#4e2a1f")
-      (fg-accent "#e0936f")
+      (bg-accent "#52402f")
+      (fg-accent "#e6a577")
 
       (fg-faint-red "#d09090")
       (fg-faint-green "#85c397")
