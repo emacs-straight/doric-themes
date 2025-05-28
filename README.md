@@ -8,7 +8,7 @@ If you want maximalist themes in terms of colour, check my `ef-themes`
 package. For something in-between, which I would consider the best
 "default theme" for a text editor, opt for my `modus-themes`.
 
-+ Package name (GNU ELPA): `doric-themes` (WORK-IN-PROGRESS)
++ Package name (GNU ELPA): `doric-themes`
 + Sample pictures: <https://protesilaos.com/emacs/doric-themes-pictures>
 + Git repository: <https://github.com/protesilaos/doric-themes>
 + Backronym: Doric Only Really Intensifies Conservatively ... themes.
@@ -16,13 +16,9 @@ package. For something in-between, which I would consider the best
 ## Sample configuration
 
 ```elisp
-;; I will update this once the actual package is available.  For now,
-;; you have to clone the Git repository somewhere, then specify that
-;; in the `:load-path' below.
 (use-package doric-themes
-  :ensure nil
+  :ensure t
   :demand t
-  :load-path "~/Git/Projects/doric-themes/"
   :config
   ;; These are the default values.
   (setq doric-themes-to-toggle '(doric-light doric-dark))

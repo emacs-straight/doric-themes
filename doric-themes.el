@@ -5,7 +5,7 @@
 ;; Author: Protesilaos Stavrou <info@protesilaos.com>
 ;; Maintainer: Protesilaos Stavrou <info@protesilaos.com>
 ;; URL: https://github.com/protesilaos/doric-themes
-;; Version: 0.0.1
+;; Version: 0.1.0
 ;; Package-Requires: ((emacs "29.1"))
 ;; Keywords: faces, theme, accessibility
 
@@ -400,7 +400,6 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     header-line
     magit-blame-heading
     magit-blame-margin
-    markdown-blockquote-face
     match
     menu
     mu4e-region-code
@@ -597,8 +596,6 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     org-scheduled-previously
     org-scheduled-today
     org-special-keyword
-    org-table-header
-    org-table-row
     org-time-grid
     org-upcoming-deadline
     org-upcoming-distant-deadline
@@ -653,6 +650,8 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     notmuch-search-flagged-face
     org-imminent-deadline
     org-headline-todo
+    org-table-header
+    org-table-row
     org-todo
     org-warning
     package-status-installed
@@ -1042,8 +1041,7 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     transient-key-return
     transient-key-stack
     transient-key-stay
-    vertico-group-title
-    which-key-key-face))
+    vertico-group-title))
 
 (defconst doric-themes-italic-faces
   '(Info-quoted
@@ -1112,6 +1110,7 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     magit-signature-revoked
     magit-signature-untrusted
     magit-mode-line-process-error
+    markdown-blockquote-face
     markdown-inline-code-face
     message-cited-text-1
     message-cited-text-2
@@ -1424,6 +1423,7 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
             `(query-replace ((t :inherit isearch)))
 
             '(help-key-binding ((t :inherit (fixed-pitch bold-italic))))
+
             '(line-number-current-line ((t :inherit (highlight bold))))
 
             `(keycast-key ((t :inherit bold-italic :background ,fg-shadow-intense :foreground ,bg-main)))
@@ -1432,8 +1432,8 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
             `(magit-section-highlight (( )))
 
             `(markdown-code-face ((t :inherit fixed-pitch :background ,bg-shadow-subtle :extend t)))
-            `(markdown-language-keyword-face ((t :inherit fixed-pitch :background ,bg-neutral)))
-            '(markdown-table-face ((t :inherit fixed-pitch)))
+            `(markdown-language-keyword-face ((t :inherit fixed-pitch :background ,bg-neutral :foreground ,fg-neutral)))
+            `(markdown-table-face ((t :inherit fixed-pitch :foreground ,fg-accent)))
 
             '(markup-meta-face ((t :inherit fixed-pitch)))
             '(markup-replacement-face ((t :inherit fixed-pitch)))
@@ -1457,7 +1457,7 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
                  :overline ,fg-shadow-subtle)))
 
             `(org-block ((t :inherit fixed-pitch :background ,bg-shadow-subtle :extend t)))
-            `(org-block-begin-line ((t :inherit fixed-pitch :background ,bg-neutral :foreground ,fg-shadow-intense :extend t)))
+            `(org-block-begin-line ((t :inherit fixed-pitch :background ,bg-neutral :foreground ,fg-neutral :extend t)))
             `(org-block-end-line ((t :inherit org-block-begin-line)))
             '(org-checkbox ((t :inherit fixed-pitch)))
             `(org-column-title ((t :inherit fixed-pitch :foreground ,fg-shadow-subtle)))
@@ -1473,7 +1473,7 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
             `(org-indent ((t :inherit (fixed-pitch org-hide))))
             `(org-meta-line ((t :inherit fixed-pitch :foreground ,fg-shadow-subtle)))
             '(org-property-value ((t :inherit fixed-pitch)))
-            `(org-table ((t :inherit fixed-pitch :foreground ,fg-shadow-subtle)))
+            `(org-table ((t :inherit fixed-pitch :foreground ,fg-accent)))
 
             `(reb-match-0 ((t :background ,bg-accent :foreground ,fg-main)))
             `(reb-match-1 ((t :background ,bg-shadow-subtle :foreground ,fg-shadow-subtle)))
@@ -1484,11 +1484,11 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
             `(spacious-padding-subtle-mode-line-inactive ((t :foreground ,bg-accent)))
 
             `(tab-bar-tab ((t :inherit bold :background ,bg-main :foreground ,fg-main)))
-            `(tab-bar-tab-inactive ((t :background ,bg-neutral :foreground ,fg-shadow-subtle)))
+            `(tab-bar-tab-inactive ((t :background ,bg-neutral :foreground ,fg-neutral)))
 
             `(tab-line-tab ((t :inherit tab-line-tab-current)))
             `(tab-line-tab-current ((t :inherit bold :background ,bg-main :foreground ,fg-main)))
-            `(tab-line-tab-inactive ((t :background ,bg-neutral :foreground ,fg-shadow-subtle)))
+            `(tab-line-tab-inactive ((t :background ,bg-neutral :foreground ,fg-neutral)))
             `(tab-line-tab-inactive-alternate ((t :inherit tab-line-tab-inactive)))
 
             '(telega-webpage-fixed ((t :inherit fixed-pitch)))
@@ -1498,6 +1498,8 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
             `(vc-locally-added-state ((t :inherit italic)))
 
             '(vtable ((t :inherit fixed-pitch)))
+
+            '(which-key-key-face ((t :inherit (fixed-pitch bold-italic))))
 
             `(whitespace-big-indent ((t :foreground ,bg-shadow-intense)))
             `(whitespace-empty ((t :foreground ,bg-shadow-intense)))
