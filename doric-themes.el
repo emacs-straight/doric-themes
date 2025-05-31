@@ -259,18 +259,17 @@ respectively."
         (delete current-theme themes)
       themes)))
 
-(defvar doric-themes-subset-history nil
-  "Minibuffer history for `doric-themes-subset-prompt'.")
+(make-obsolete-variable 'doric-themes-subset-history nil "0.2.0")
 
 (defun doric-themes-subset-prompt ()
   "Select `dark' or `light' and return it as a symbol."
-  (let ((default (car doric-themes-subset-history)))
-    (intern
-     (completing-read
-      (format-prompt "Select variant" default)
-      '("dark" "light")
-      nil :require-match nil
-      doric-themes-subset-history default))))
+  (intern
+   (cadr
+    (read-multiple-choice
+     "Variant"
+     '((?d "dark" "Load a random dark theme")
+       (?l "light" "Load a random light theme"))
+     "Limit to the dark or light subset of the Ef themes collection."))))
 
 ;;;###autoload
 (defun doric-themes-load-random (&optional variant)
@@ -320,7 +319,6 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     org-dispatcher-highlight
     proced-marked
     pulse-highlight-start-face
-    read-multiple-choice-face
     rectangle-preview
     speedbar-highlight-face
     tab-bar-tab-highlight
@@ -1302,7 +1300,7 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
             `(tty-menu-disabled-face ((t :background ,bg-accent :foreground ,fg-shadow-subtle)))
             `(tty-menu-enabled-face ((t :background ,bg-accent :foreground ,fg-main)))
             `(tty-menu-selected-face ((t :background ,fg-main :foreground ,bg-main)))
-
+            `(read-multiple-choice-face ((t :inherit bold-italic :background ,fg-shadow-intense :foreground ,bg-main)))
 
             '(adoc-meta-face ((t :inherit fixed-pitch)))
             '(adoc-meta-hide-face ((t :inherit fixed-pitch)))
