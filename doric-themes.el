@@ -469,6 +469,7 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     all-the-icons-silver
     all-the-icons-yellow
     avy-background-face
+    aw-background-face
     breadcrumb-face
     calendar-weekend-header
     change-log-email
@@ -543,6 +544,7 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     marginalia-type
     marginalia-value
     marginalia-version
+    markdown-metadata-key-face
     message-header-mml
     message-header-name
     message-header-newsgroups
@@ -776,8 +778,6 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     org-inline-src-block
     org-latex-and-related
     org-mode-line-clock
-    org-quote
-    org-verse
     proced-cpu
     proced-mark
     proced-memory-low-usage
@@ -1161,8 +1161,7 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     ztreep-node-count-children-face))
 
 (defconst doric-themes-underline-emphasis-faces
-  '(aw-leading-char-face
-    company-echo-common
+  '(company-echo-common
     company-preview-common
     company-preview-search
     company-tooltip-common
@@ -1337,6 +1336,8 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
             `(ansi-color-bright-cyan ((t :background ,fg-faint-cyan :foreground ,fg-faint-cyan)))
             `(ansi-color-cyan ((t :background ,fg-faint-cyan :foreground ,fg-faint-cyan)))
 
+            `(aw-leading-char-face ((t :inherit bold-italic :height 1.5 :foreground ,fg-accent)))
+
             `(company-tooltip ((t :inherit fixed-pitch :background ,bg-shadow-subtle :foreground ,fg-shadow-subtle)))
 
             `(corfu-default ((t :inherit fixed-pitch :background ,bg-shadow-subtle :foreground ,fg-shadow-subtle)))
@@ -1490,6 +1491,8 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
             `(org-indent ((t :inherit (fixed-pitch org-hide))))
             `(org-meta-line ((t :inherit fixed-pitch :foreground ,fg-shadow-subtle)))
             '(org-property-value ((t :inherit fixed-pitch)))
+            '(org-quote ((t :inherit org-block)))
+            '(org-verse ((t :inherit org-block)))
             `(org-table ((t :inherit fixed-pitch :foreground ,fg-accent)))
 
             `(reb-match-0 ((t :background ,bg-accent :foreground ,fg-main)))
