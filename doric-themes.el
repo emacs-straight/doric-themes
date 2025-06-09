@@ -601,9 +601,9 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     org-done
     org-headline-done
     org-scheduled
-    org-scheduled-previously
     org-scheduled-today
     org-special-keyword
+    org-tag
     org-time-grid
     org-upcoming-deadline
     org-upcoming-distant-deadline
@@ -656,7 +656,6 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     notmuch-search-matching-authors
     notmuch-tree-match-author-face
     notmuch-search-flagged-face
-    org-imminent-deadline
     org-headline-todo
     org-table-header
     org-table-row
@@ -1143,7 +1142,6 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     org-latex-and-related
     org-macro
     org-priority
-    org-tag
     org-verbatim
     package-description
     sh-heredoc
@@ -1488,10 +1486,12 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
             `(org-ellipsis (( ))) ; inherits from the heading's color
             '(org-formula ((t :inherit fixed-pitch)))
             `(org-hide ((t :foreground ,bg-main)))
+            `(org-imminent-deadline ((t :inherit bold :foreground ,fg-accent)))
             `(org-indent ((t :inherit (fixed-pitch org-hide))))
             `(org-meta-line ((t :inherit fixed-pitch :foreground ,fg-shadow-subtle)))
             '(org-property-value ((t :inherit fixed-pitch)))
             '(org-quote ((t :inherit org-block)))
+            `(org-scheduled-previously ((t :inherit bold :foreground ,fg-shadow-subtle)))
             '(org-verse ((t :inherit org-block)))
             `(org-table ((t :inherit fixed-pitch :foreground ,fg-accent)))
 
