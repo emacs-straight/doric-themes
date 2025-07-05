@@ -1,4 +1,4 @@
-;;; doric-themes.el --- Highly legible minimalist themes -*- lexical-binding:t -*-
+;;; doric-themes.el --- Highly legible minimalist themes with precise typography -*- lexical-binding:t -*-
 
 ;; Copyright (C) 2025  Free Software Foundation, Inc.
 
@@ -1505,6 +1505,9 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
             `(org-verbatim ((t :inherit (fixed-pitch italic) :foreground ,fg-shadow-subtle)))
             '(org-verse ((t :inherit org-block)))
             `(org-table ((t :inherit fixed-pitch :foreground ,fg-accent)))
+
+            `(package-mark-delete-line ((t :inherit bold-italic :background ,bg-shadow-intense :foreground ,fg-main)))
+            `(package-mark-install-line ((t :inherit bold-italic :background ,bg-accent :foreground ,fg-main)))
 
             '(rcirc-monospace-text ((t :inherit fixed-pitch)))
             '(rcirc-server ((t :inherit font-lock-comment-face)))
