@@ -5,7 +5,7 @@
 ;; Author: Protesilaos Stavrou <info@protesilaos.com>
 ;; Maintainer: Protesilaos Stavrou <info@protesilaos.com>
 ;; URL: https://github.com/protesilaos/doric-themes
-;; Version: 0.1.0
+;; Version: 0.2.0
 ;; Package-Requires: ((emacs "29.1"))
 ;; Keywords: faces, theme, accessibility
 
@@ -61,7 +61,6 @@
 (defgroup doric-themes nil
   "Highly legible minimalist themes with precise typography."
   :group 'faces
-  :link '(url-link :tag "Homepage" "https://protesilaos.com/emacs/doric-themes")
   :link '(url-link :tag "Sample pictures" "https://protesilaos.com/emacs/doric-themes-pictures"))
 
 ;;;; User options
