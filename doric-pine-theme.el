@@ -54,14 +54,14 @@
       (fg-neutral "#cdd9be")
 
       (bg-shadow-intense "#70523a")
-      (fg-shadow-intense "#c0b699")
+      (fg-shadow-intense "#c8b399")
 
       (bg-accent "#305d42")
-      (fg-accent "#a2d4a3")
+      (fg-accent "#b0d593")
 
-      (fg-faint-red "#dba2a2")
-      (fg-faint-green "#85c397")
-      (fg-faint-yellow "#c4a992")
+      (fg-faint-red "#dbb08e")
+      (fg-faint-green "#8fd297")
+      (fg-faint-yellow "#bbc072")
       (fg-faint-blue "#95afd2")
       (fg-faint-magenta "#c5a3b2")
       (fg-faint-cyan "#a5bfce"))
