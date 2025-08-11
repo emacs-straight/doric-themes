@@ -59,13 +59,20 @@
       (bg-accent "#e7d5b9")
       (fg-accent "#74321f")
 
-      (fg-faint-red "#750000")
-      (fg-faint-green "#056100")
-      (fg-faint-yellow "#5f4602")
-      (fg-faint-blue "#353362")
-      (fg-faint-magenta "#553372")
-      (fg-faint-cyan "#35485e"))
-  "Palette of `doric-earth' theme.")
+      (fg-red "#a03000")
+      (fg-green "#206700")
+      (fg-yellow "#705200")
+      (fg-blue "#103060")
+      (fg-magenta "#690f44")
+      (fg-cyan "#105f66")
+
+      (bg-red "#f3c4b5")
+      (bg-green "#c8ebb0")
+      (bg-yellow "#efe4b0")
+      (bg-blue "#bac9e5")
+      (bg-magenta "#e7bfd7")
+      (bg-cyan "#c9e6e0"))
+    "Palette of `doric-earth' theme.")
 
   (doric-themes-define-theme doric-earth light))
 
