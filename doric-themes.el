@@ -5,7 +5,7 @@
 ;; Author: Protesilaos Stavrou <info@protesilaos.com>
 ;; Maintainer: Protesilaos Stavrou <info@protesilaos.com>
 ;; URL: https://github.com/protesilaos/doric-themes
-;; Version: 0.2.0
+;; Version: 0.3.0
 ;; Package-Requires: ((emacs "29.1"))
 ;; Keywords: faces, theme, accessibility
 
@@ -406,6 +406,7 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     magit-blame-margin
     match
     menu
+    message-separator
     mu4e-region-code
     notmuch-crypto-decryption
     notmuch-crypto-signature-bad
@@ -1029,7 +1030,6 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     marginalia-file-priv-dir
     marginalia-key
     message-mml
-    message-separator
     org-mode-line-clock-overrun
     package-status-avail-obso
     package-status-disabled
@@ -1080,17 +1080,6 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     git-commit-comment-file
     git-commit-nonempty-second-line
     git-commit-overlong-summary
-    gnus-cite-1
-    gnus-cite-10
-    gnus-cite-11
-    gnus-cite-2
-    gnus-cite-3
-    gnus-cite-4
-    gnus-cite-5
-    gnus-cite-6
-    gnus-cite-7
-    gnus-cite-8
-    gnus-cite-9
     gnus-cite-attribution
     gnus-emphasis-italic
     gnus-group-mail-1-empty
@@ -1118,17 +1107,6 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     magit-mode-line-process-error
     markdown-blockquote-face
     markdown-inline-code-face
-    message-cited-text-1
-    message-cited-text-2
-    message-cited-text-3
-    message-cited-text-4
-    mu4e-cited-1-face
-    mu4e-cited-2-face
-    mu4e-cited-3-face
-    mu4e-cited-4-face
-    mu4e-cited-5-face
-    mu4e-cited-6-face
-    mu4e-cited-7-face
     notmuch-wash-cited-text
     org-agenda-calendar-event
     org-agenda-calendar-sexp
@@ -1293,6 +1271,32 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
   '(flycheck-info
     flymake-note))
 
+(defconst doric-themes-cite-odd
+  '(gnus-cite-1
+    gnus-cite-3
+    gnus-cite-5
+    gnus-cite-7
+    gnus-cite-9
+    gnus-cite-11
+    message-cited-text-1
+    message-cited-text-3
+    mu4e-cited-1-face
+    mu4e-cited-3-face
+    mu4e-cited-5-face
+    mu4e-cited-7-face))
+
+(defconst doric-themes-cite-even
+  '(gnus-cite-2
+    gnus-cite-4
+    gnus-cite-6
+    gnus-cite-8
+    gnus-cite-10
+    message-cited-text-2
+    message-cited-text-4
+    mu4e-cited-2-face
+    mu4e-cited-4-face
+    mu4e-cited-6-face))
+
 (defun doric-themes-prepare-faces (&rest faces-and-attributes)
   "Set faces to their respective attributes in FACES-AND-ATTRIBUTES."
   (pcase-let ((`(,faces . ,attributes) faces-and-attributes))
@@ -1302,8 +1306,10 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
      faces)))
 
 ;;;###autoload
-(defmacro doric-themes-define-theme (name background-mode)
-  "Define theme with NAME and `light' or `dark' BACKGROUND-MODE."
+(defmacro doric-themes-define-theme (name background-mode &optional description)
+  "Define theme with NAME and `light' or `dark' BACKGROUND-MODE.
+With optional DESCRIPTION use it to describe the theme, otherwise
+default a generic text that mentions the BACKGROUND-MODE."
   (declare (indent 0))
   (unless (memq background-mode '(light dark))
     (error "The BACKGROUND-MODE must be either `light' or `dark'"))
@@ -1311,7 +1317,7 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
       `(progn
          (custom-declare-theme
           ',name 'doric-themes
-          ,(format "Minimalist %s theme." background-mode)
+          ,(or description (format "Minimalist %s theme." background-mode))
           (list :kind 'color-scheme :background-mode ',background-mode :family 'doric))
          (let ,palette
            (custom-theme-set-faces
@@ -1408,6 +1414,9 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
             ,@(doric-themes-prepare-faces doric-themes-diff-removed-faces :background 'bg-red :foreground 'fg-red)
             ,@(doric-themes-prepare-faces doric-themes-diff-removed-faces-foreground-only :foreground 'fg-red)
             ,@(doric-themes-prepare-faces doric-themes-diff-removed-refine-faces :inherit ''bold)
+
+            ,@(doric-themes-prepare-faces doric-themes-cite-odd :inherit ''italic :foreground 'fg-accent)
+            ,@(doric-themes-prepare-faces doric-themes-cite-even :inherit ''italic :foreground 'fg-shadow-subtle)
 
             '(embark-keybinding ((t :inherit (fixed-pitch bold-italic))))
 
