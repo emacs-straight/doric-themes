@@ -39,7 +39,8 @@
 (eval-when-compile (require 'subr-x))
 
 (defconst doric-themes-light-themes
-  '(doric-cherry
+  '(doric-beach
+    doric-cherry
     doric-earth
     doric-light
     doric-marble
@@ -53,6 +54,7 @@
     doric-obsidian
     doric-pine
     doric-plum
+    doric-valley
     doric-water)
   "Dark themes.")
 
@@ -1482,7 +1484,7 @@ default a generic text that mentions the BACKGROUND-MODE."
 
             '(help-key-binding ((t :inherit (fixed-pitch bold-italic))))
 
-            '(line-number-current-line ((t :inherit (highlight bold))))
+            `(line-number-current-line ((t :inherit bold :background ,bg-accent :foreground ,fg-accent)))
 
             `(keycast-key ((t :inherit bold-italic :background ,fg-shadow-intense :foreground ,bg-main)))
 
