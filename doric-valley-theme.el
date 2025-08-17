@@ -42,7 +42,7 @@
     (require 'doric-themes))
 
   (defvar doric-valley-palette
-    '((cursor "#a4bedb")
+    '((cursor "#84deeb")
       (bg-main "#383035")
       (fg-main "#e0d5b7")
       (border "#7a787f")
@@ -53,25 +53,25 @@
       (bg-neutral "#554f52")
       (fg-neutral "#d9cfbe")
 
-      (bg-shadow-intense "#5a5470")
-      (fg-shadow-intense "#d2cae7")
+      (bg-shadow-intense "#4a5e60")
+      (fg-shadow-intense "#b2e2c7")
 
       (bg-accent "#714d4c")
       (fg-accent "#f6c097")
 
       (fg-red "#eca28f")
       (fg-green "#b9d0aa")
-      (fg-yellow "#c0b080")
+      (fg-yellow "#c0b060")
       (fg-blue "#9fbfe7")
       (fg-magenta "#e9acbf")
       (fg-cyan "#a0c0d0")
 
-      (bg-red "#621f33")
-      (bg-green "#19402f")
-      (bg-yellow "#50442f")
-      (bg-blue "#3a386b")
+      (bg-red "#5b301f")
+      (bg-green "#34502f")
+      (bg-yellow "#514e2f")
+      (bg-blue "#2a3f5d")
       (bg-magenta "#5a2f40")
-      (bg-cyan "#2f495f"))
+      (bg-cyan "#2f4e4f"))
   "Palette of `doric-valley' theme.")
 
   (doric-themes-define-theme doric-valley dark "Minimalist theme with dark background and indigo+gold hues"))
