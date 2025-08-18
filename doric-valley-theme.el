@@ -1,4 +1,4 @@
-;;; doric-valley-theme.el --- Minimalist theme with dark background and indigo+gold hues -*- lexical-binding:t -*-
+;;; doric-valley-theme.el --- Minimalist theme with dark background and gold+teal hues -*- lexical-binding:t -*-
 
 ;; Copyright (C) 2025  Free Software Foundation, Inc.
 
@@ -42,7 +42,7 @@
     (require 'doric-themes))
 
   (defvar doric-valley-palette
-    '((cursor "#84deeb")
+    '((cursor "#94d0eb")
       (bg-main "#383035")
       (fg-main "#e0d5b7")
       (border "#7a787f")
@@ -74,7 +74,7 @@
       (bg-cyan "#2f4e4f"))
   "Palette of `doric-valley' theme.")
 
-  (doric-themes-define-theme doric-valley dark "Minimalist theme with dark background and indigo+gold hues"))
+  (doric-themes-define-theme doric-valley dark "Minimalist theme with dark background and gold+teal hues"))
 
 (provide 'doric-valley-theme)
 ;;; doric-valley-theme.el ends here
