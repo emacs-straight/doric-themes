@@ -359,7 +359,6 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     denote-faces-second
     denote-faces-time
     denote-faces-year
-    diary
     diredfl-date-time
     display-time-date-and-time
     ediff-current-diff-Ancestor
@@ -373,13 +372,14 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     magit-log-author
     magit-log-date
     marginalia-date
+    message-header-cc
+    message-header-other
     nerd-icons-completion-dir-face
     nerd-icons-dired-dir-face
     nerd-icons-ibuffer-dir-face
     notmuch-search-date
     org-agenda-calendar-daterange
     org-agenda-column-dateline
-    org-agenda-diary
     org-date
     org-sexp-date
     proced-time-colon
@@ -393,6 +393,7 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     company-tooltip-scrollbar-track
     consult-preview-line
     corfu-popupinfo
+    diary
     ediff-even-diff-A
     ediff-even-diff-Ancestor
     ediff-even-diff-B
@@ -418,6 +419,7 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     notmuch-crypto-signature-good-key
     notmuch-crypto-signature-unknown
     org-agenda-clocking
+    org-agenda-diary
     org-agenda-restriction-lock
     org-clock-overlay
     secondary-selection
@@ -549,8 +551,6 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     marginalia-type
     marginalia-value
     marginalia-version
-    message-header-mml
-    message-header-name
     message-header-newsgroups
     message-header-xheader
     mu4e-header-face
@@ -921,8 +921,6 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     markdown-header-face-4
     markdown-header-face-5
     markdown-header-face-6
-    message-header-cc
-    message-header-other
     message-header-subject
     message-header-to
     minibuffer-prompt
@@ -999,6 +997,7 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     log-edit-header
     magit-section-heading
     markdown-metadata-key-face
+    message-header-name
     package-help-section-name))
 
 (defconst doric-themes-bold-italic-faces
