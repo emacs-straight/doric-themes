@@ -651,7 +651,6 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     gnus-server-agent
     gnus-server-cloud-host
     hexl-address-region
-    holiday
     homoglyph
     ido-subdir
     log-view-message
@@ -763,8 +762,6 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     notmuch-tag-unread
     notmuch-tag-flagged
     org-agenda-current-time
-    org-agenda-date
-    org-agenda-date-weekend
     org-agenda-filter-category
     org-agenda-filter-effort
     org-agenda-filter-regexp
@@ -809,7 +806,6 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     breadcrumb-imenu-leaf-face
     breadcrumb-project-leaf-face
     buffer-menu-buffer
-    calendar-weekday-header
     change-log-name
     change-log-file
     circe-prompt-face
@@ -925,8 +921,6 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     minibuffer-prompt
     mode-line-buffer-id
     mode-line-emphasis
-    org-agenda-date-today
-    org-agenda-date-weekend-today
     org-agenda-structure
     org-checkbox-statistics-done
     org-checkbox-statistics-todo
@@ -991,13 +985,15 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     ztreep-header-face))
 
 (defconst doric-themes-bold-intense-faces
-  '(elfeed-search-unread-title-face
+  '(calendar-weekday-header
+    elfeed-search-unread-title-face
     git-commit-comment-heading
     git-commit-summary
     log-edit-header
     magit-section-heading
     markdown-metadata-key-face
     message-header-name
+    org-agenda-date
     package-help-section-name))
 
 (defconst doric-themes-bold-italic-faces
@@ -1481,6 +1477,8 @@ default a generic text that mentions the BACKGROUND-MODE."
                (((class color) (min-colors 88) (background dark))
                 :background "#000000" :foreground "#cab000")))
 
+            `(holiday ((t :inherit bold :foreground ,fg-accent)))
+
             `(isearch ((t :background ,bg-shadow-intense :foreground ,fg-main)))
             `(isearch-fail ((t :inherit (underline bold))))
             `(isearch-group-1 ((t :background ,bg-accent :foreground ,fg-accent)))
@@ -1527,7 +1525,11 @@ default a generic text that mentions the BACKGROUND-MODE."
             `(notmuch-message-summary-face
               ((default :background ,bg-shadow-subtle)
                (((supports :overline t))
-                 :overline ,fg-shadow-subtle)))
+                :overline ,fg-shadow-subtle)))
+
+            `(org-agenda-date-weekend ((t :inherit (bold shadow))))
+            `(org-agenda-date-today ((t :inherit (underline org-agenda-date))))
+            `(org-agenda-date-weekend-today ((t :inherit (underline org-agenda-date-weekend))))
 
             `(org-block ((t :inherit fixed-pitch :background ,bg-shadow-subtle :extend t)))
             `(org-block-begin-line ((t :inherit fixed-pitch :background ,bg-neutral :foreground ,fg-neutral :extend t)))
