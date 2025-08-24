@@ -603,8 +603,6 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     org-column
     org-done
     org-headline-done
-    org-scheduled
-    org-scheduled-today
     org-special-keyword
     org-tag
     org-time-grid
@@ -659,6 +657,7 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     notmuch-tree-match-author-face
     notmuch-search-flagged-face
     org-headline-todo
+    org-scheduled-previously
     org-table-row
     org-todo
     org-warning
@@ -771,6 +770,8 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     org-inline-src-block
     org-latex-and-related
     org-mode-line-clock
+    org-scheduled
+    org-scheduled-today
     proced-cpu
     proced-mark
     proced-memory-low-usage
@@ -861,8 +862,6 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     font-lock-regexp-grouping-backslash
     font-lock-regexp-grouping-construct
     geiser-font-lock-repl-prompt
-    git-commit-comment-action
-    git-commit-comment-branch-local
     git-commit-summary
     gnus-emphasis-bold
     gnus-header-content
@@ -1018,6 +1017,9 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     font-lock-builtin-face
     font-lock-preprocessor-face
     font-lock-type-face
+    git-commit-comment-action
+    git-commit-comment-branch-remote
+    git-commit-comment-branch-local
     gnus-emphasis-bold-italic
     gnus-server-denied
     ibuffer-locked-buffer
@@ -1486,9 +1488,22 @@ default a generic text that mentions the BACKGROUND-MODE."
 
             '(help-key-binding ((t :inherit (fixed-pitch bold-italic))))
 
-            `(line-number-current-line ((t :inherit bold :background ,bg-accent :foreground ,fg-accent)))
-
             `(keycast-key ((t :inherit bold-italic :background ,fg-shadow-intense :foreground ,bg-main)))
+
+            `(lin-blue ((t :background ,bg-blue)))
+            `(lin-cyan ((t :background ,bg-cyan)))
+            `(lin-green ((t :background ,bg-green)))
+            `(lin-magenta ((t :background ,bg-magenta)))
+            `(lin-red ((t :background ,bg-red)))
+            `(lin-yellow ((t :background ,bg-yellow)))
+            `(lin-blue-override-fg ((t :background ,bg-blue :foreground ,fg-main)))
+            `(lin-cyan-override-fg ((t :background ,bg-cyan :foreground ,fg-main)))
+            `(lin-green-override-fg ((t :background ,bg-green :foreground ,fg-main)))
+            `(lin-magenta-override-fg ((t :background ,bg-magenta :foreground ,fg-main)))
+            `(lin-red-override-fg ((t :background ,bg-red :foreground ,fg-main)))
+            `(lin-yellow-override-fg ((t :background ,bg-yellow :foreground ,fg-main)))
+
+            `(line-number-current-line ((t :inherit bold :background ,bg-accent :foreground ,fg-accent)))
 
             `(magit-diff-context-highlight ((t :background ,bg-shadow-subtle :foreground ,fg-shadow-subtle)))
             `(magit-diff-file-heading ((t :inherit bold :foreground ,fg-accent)))
@@ -1550,13 +1565,19 @@ default a generic text that mentions the BACKGROUND-MODE."
             `(org-meta-line ((t :inherit fixed-pitch :foreground ,fg-shadow-subtle)))
             '(org-property-value ((t :inherit fixed-pitch)))
             '(org-quote ((t :inherit org-block)))
-            `(org-scheduled-previously ((t :inherit bold :foreground ,fg-shadow-subtle)))
             `(org-verbatim ((t :inherit (fixed-pitch italic) :foreground ,fg-shadow-subtle)))
             '(org-verse ((t :inherit org-block)))
             `(org-table ((t :inherit fixed-pitch :foreground ,fg-accent)))
 
             `(package-mark-delete-line ((t :inherit bold-italic :background ,bg-shadow-intense :foreground ,fg-main)))
             `(package-mark-install-line ((t :inherit bold-italic :background ,bg-accent :foreground ,fg-main)))
+
+            `(pulsar-blue ((t :background ,bg-blue)))
+            `(pulsar-cyan ((t :background ,bg-cyan)))
+            `(pulsar-green ((t :background ,bg-green)))
+            `(pulsar-magenta ((t :background ,bg-magenta)))
+            `(pulsar-red ((t :background ,bg-red)))
+            `(pulsar-yellow ((t :background ,bg-yellow)))
 
             '(rcirc-monospace-text ((t :inherit fixed-pitch)))
             '(rcirc-server ((t :inherit font-lock-comment-face)))
