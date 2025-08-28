@@ -36,6 +36,7 @@
 ;;; Code:
 
 (require 'seq)
+(require 'color)
 (eval-when-compile (require 'subr-x))
 
 (defconst doric-themes-light-themes
@@ -346,10 +347,7 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     substitute-match))
 
 (defconst doric-themes-intense-shadow-foreground-only-faces
-  '(all-the-icons-completion-dir-face
-    all-the-icons-dired-dir-face
-    all-the-icons-ibuffer-dir-face
-    calendar-weekday-header
+  '(calendar-weekday-header
     change-log-date
     denote-faces-date
     denote-faces-day
@@ -374,9 +372,6 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     marginalia-date
     message-header-cc
     message-header-other
-    nerd-icons-completion-dir-face
-    nerd-icons-dired-dir-face
-    nerd-icons-ibuffer-dir-face
     notmuch-search-date
     org-agenda-calendar-daterange
     org-agenda-column-dateline
@@ -440,11 +435,13 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
 (defconst doric-themes-subtle-shadow-foreground-only-faces
   '(all-the-icons-blue
     all-the-icons-blue-alt
+    all-the-icons-completion-dir-face
     all-the-icons-cyan
     all-the-icons-cyan-alt
     all-the-icons-dblue
     all-the-icons-dcyan
     all-the-icons-dgreen
+    all-the-icons-dired-dir-face
     all-the-icons-dmaroon
     all-the-icons-dorange
     all-the-icons-dpink
@@ -453,6 +450,7 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     all-the-icons-dsilver
     all-the-icons-dyellow
     all-the-icons-green
+    all-the-icons-ibuffer-dir-face
     all-the-icons-ibuffer-file-face
     all-the-icons-ibuffer-mode-face
     all-the-icons-ibuffer-size-face
@@ -556,11 +554,13 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     mu4e-header-face
     nerd-icons-blue
     nerd-icons-blue-alt
+    nerd-icons-completion-dir-face
     nerd-icons-cyan
     nerd-icons-cyan-alt
     nerd-icons-dblue
     nerd-icons-dcyan
     nerd-icons-dgreen
+    nerd-icons-dired-dir-face
     nerd-icons-dmaroon
     nerd-icons-dorange
     nerd-icons-dpink
@@ -569,6 +569,7 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     nerd-icons-dsilver
     nerd-icons-dyellow
     nerd-icons-green
+    nerd-icons-ibuffer-dir-face
     nerd-icons-ibuffer-file-face
     nerd-icons-ibuffer-mode-face
     nerd-icons-ibuffer-size-face
@@ -624,8 +625,8 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     transient-inactive-value
     transient-unreachable
     transient-unreachable-key
-    vertico-multiline
     vc-ignored-state
+    vertico-multiline
     window-divider
     window-divider-first-pixel
     window-divider-last-pixel
@@ -1308,6 +1309,14 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
        (backquote (list ',face (list (list t ,@attributes)))))
      faces)))
 
+(defun doric-themes-adjust-value (hex-rgb percentage)
+  "Adjust value of HEX-RGB colour by PERCENTAGE."
+  (pcase-let* ((`(,r ,g ,b) (color-name-to-rgb hex-rgb))
+               (fn (if (color-dark-p (list r g b))
+                       #'color-lighten-name
+                     #'color-darken-name)))
+    (funcall fn hex-rgb percentage)))
+
 ;;;###autoload
 (defmacro doric-themes-define-theme (name background-mode &optional description)
   "Define theme with NAME and `light' or `dark' BACKGROUND-MODE.
@@ -1411,13 +1420,13 @@ default a generic text that mentions the BACKGROUND-MODE."
 
             ,@(doric-themes-prepare-faces doric-themes-diff-added-faces :background 'bg-green :foreground 'fg-green)
             ,@(doric-themes-prepare-faces doric-themes-diff-added-faces-foreground-only :foreground 'fg-green)
-            ,@(doric-themes-prepare-faces doric-themes-diff-added-refine-faces :inherit ''bold)
+            ,@(doric-themes-prepare-faces doric-themes-diff-added-refine-faces :inherit ''bold :background '(doric-themes-adjust-value bg-green 10))
             ,@(doric-themes-prepare-faces doric-themes-diff-changed-faces :background 'bg-yellow :foreground 'fg-yellow)
             ,@(doric-themes-prepare-faces doric-themes-diff-changed-faces-foreground-only :foreground 'fg-yellow)
-            ,@(doric-themes-prepare-faces doric-themes-diff-changed-refine-faces :inherit ''bold)
+            ,@(doric-themes-prepare-faces doric-themes-diff-changed-refine-faces :inherit ''bold :background '(doric-themes-adjust-value bg-yellow 10))
             ,@(doric-themes-prepare-faces doric-themes-diff-removed-faces :background 'bg-red :foreground 'fg-red)
             ,@(doric-themes-prepare-faces doric-themes-diff-removed-faces-foreground-only :foreground 'fg-red)
-            ,@(doric-themes-prepare-faces doric-themes-diff-removed-refine-faces :inherit ''bold)
+            ,@(doric-themes-prepare-faces doric-themes-diff-removed-refine-faces :inherit ''bold :background '(doric-themes-adjust-value bg-red 10))
 
             ,@(doric-themes-prepare-faces doric-themes-cite-odd :inherit ''italic :foreground 'fg-accent)
             ,@(doric-themes-prepare-faces doric-themes-cite-even :inherit ''italic :foreground 'fg-shadow-subtle)
