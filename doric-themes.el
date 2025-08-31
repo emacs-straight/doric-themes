@@ -1192,14 +1192,22 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
   '(denote-faces-prompt-new-name
     diff-added
     diff-indicator-added
-    ediff-current-diff-B
-    magit-diff-added-highlight
+    magit-diff-added
     magit-diffstat-added
     smerge-lower
     ztreep-diff-model-add-face))
 
-(defconst doric-themes-diff-added-faces-foreground-only
-  '(magit-diff-added))
+(defconst doric-themes-diff-added-highlight-faces
+  '(ediff-current-diff-B
+    magit-diff-added-highlight))
+
+(defconst doric-themes-diff-changed-highlight-faces
+  '(ediff-current-diff-C
+    magit-diff-base-highlight))
+
+(defconst doric-themes-diff-removed-highlight-faces
+  '(ediff-current-diff-A
+    magit-diff-removed-highlight))
 
 (defconst doric-themes-diff-added-refine-faces
   '(diff-refine-added
@@ -1210,12 +1218,8 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
   '(diff-changed
     diff-changed-unspecified
     diff-indicator-changed
-    ediff-current-diff-C
-    magit-diff-base-highlight
+    magit-diff-base
     smerge-base))
-
-(defconst doric-themes-diff-changed-faces-foreground-only
-  '(magit-diff-base))
 
 (defconst doric-themes-diff-changed-refine-faces
   '(diff-refine-changed
@@ -1226,14 +1230,10 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
   '(denote-faces-prompt-old-name
     diff-removed
     diff-indicator-removed
-    ediff-current-diff-A
-    magit-diff-removed-highlight
+    magit-diff-removed
     magit-diffstat-removed
     smerge-upper
     ztreep-diff-model-diff-face))
-
-(defconst doric-themes-diff-removed-faces-foreground-only
-  '(magit-diff-removed))
 
 (defconst doric-themes-diff-removed-refine-faces
   '(diff-refine-removed
@@ -1300,6 +1300,21 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     mu4e-cited-2-face
     mu4e-cited-4-face
     mu4e-cited-6-face))
+
+(defgroup doric-themes-faces ()
+  "Faces defined by the Doric themes."
+  :group 'doric-themes
+  :link '(url-link :tag "Sample pictures" "https://protesilaos.com/emacs/doric-themes-pictures")
+  :prefix "doric-themes-"
+  :tag "Doric themes Faces")
+
+(dolist (scope '(note warning error))
+  (custom-declare-face
+   (intern (format "doric-themes-prominent-%s" scope))
+   nil (format "Prominent notification of type %s." scope)
+   :package-version '(doric-themes . "0.4.0")
+   :version "30.1"
+   :group 'doric-themes-faces))
 
 (defun doric-themes-prepare-faces (&rest faces-and-attributes)
   "Set faces to their respective attributes in FACES-AND-ATTRIBUTES."
@@ -1418,18 +1433,22 @@ default a generic text that mentions the BACKGROUND-MODE."
 
             ,@(doric-themes-prepare-faces doric-themes-selection-faces :background 'bg-accent)
 
-            ,@(doric-themes-prepare-faces doric-themes-diff-added-faces :background 'bg-green :foreground 'fg-green)
-            ,@(doric-themes-prepare-faces doric-themes-diff-added-faces-foreground-only :foreground 'fg-green)
+            ,@(doric-themes-prepare-faces doric-themes-diff-added-faces :background '(doric-themes-adjust-value bg-green -10) :foreground 'fg-neutral)
+            ,@(doric-themes-prepare-faces doric-themes-diff-added-highlight-faces :background 'bg-green :foreground 'fg-green)
             ,@(doric-themes-prepare-faces doric-themes-diff-added-refine-faces :inherit ''bold :background '(doric-themes-adjust-value bg-green 10))
-            ,@(doric-themes-prepare-faces doric-themes-diff-changed-faces :background 'bg-yellow :foreground 'fg-yellow)
-            ,@(doric-themes-prepare-faces doric-themes-diff-changed-faces-foreground-only :foreground 'fg-yellow)
+            ,@(doric-themes-prepare-faces doric-themes-diff-changed-faces :background '(doric-themes-adjust-value bg-yellow -10) :foreground 'fg-neutral)
+            ,@(doric-themes-prepare-faces doric-themes-diff-changed-highlight-faces :background 'bg-yellow :foreground 'fg-yellow)
             ,@(doric-themes-prepare-faces doric-themes-diff-changed-refine-faces :inherit ''bold :background '(doric-themes-adjust-value bg-yellow 10))
-            ,@(doric-themes-prepare-faces doric-themes-diff-removed-faces :background 'bg-red :foreground 'fg-red)
-            ,@(doric-themes-prepare-faces doric-themes-diff-removed-faces-foreground-only :foreground 'fg-red)
+            ,@(doric-themes-prepare-faces doric-themes-diff-removed-faces :background '(doric-themes-adjust-value bg-red -10) :foreground 'fg-neutral)
+            ,@(doric-themes-prepare-faces doric-themes-diff-removed-highlight-faces :background 'bg-red :foreground 'fg-red)
             ,@(doric-themes-prepare-faces doric-themes-diff-removed-refine-faces :inherit ''bold :background '(doric-themes-adjust-value bg-red 10))
 
             ,@(doric-themes-prepare-faces doric-themes-cite-odd :inherit ''italic :foreground 'fg-accent)
             ,@(doric-themes-prepare-faces doric-themes-cite-even :inherit ''italic :foreground 'fg-shadow-subtle)
+
+            `(doric-themes-prominent-error ((t :background ,bg-red :foreground ,fg-red)))
+            `(doric-themes-prominent-warning ((t :background ,bg-yellow :foreground ,fg-yellow)))
+            `(doric-themes-prominent-note ((t :background ,bg-cyan :foreground ,fg-cyan)))
 
             '(embark-keybinding ((t :inherit (fixed-pitch bold-italic))))
 
@@ -1634,6 +1653,9 @@ default a generic text that mentions the BACKGROUND-MODE."
             `(whitespace-tab ((t :foreground ,bg-shadow-intense)))))
          (custom-theme-set-variables
           ',name
+          `(flymake-error-bitmap '(flymake-double-exclamation-mark doric-themes-prominent-error))
+          `(flymake-warning-bitmap '(exclamation-mark doric-themes-prominent-warning))
+          `(flymake-note-bitmap '(exclamation-mark doric-themes-prominent-note))
           '(frame-background-mode ',background-mode)
           '(diff-font-lock-syntax nil))
          (provide-theme ',name))
