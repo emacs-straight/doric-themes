@@ -1402,17 +1402,17 @@ default a generic text that mentions the BACKGROUND-MODE."
               `(corfu-default ((t :inherit fixed-pitch :background ,bg-shadow-subtle :foreground ,fg-shadow-subtle)))
 
               `(custom-button
-                ((default :background ,bg-shadow-intense :foreground ,fg-shadow-intense)
+                ((default :inherit variable-pitch :background ,bg-shadow-intense :foreground ,fg-shadow-intense)
                  (((supports :box t))
                   :box (:line-width 1 :color ,border :style released-button))
                  (t :underline ,border)))
               `(custom-button-mouse
-                ((default :background ,bg-accent :foreground ,fg-accent)
+                ((default :inherit variable-pitch :background ,bg-accent :foreground ,fg-accent)
                  (((supports :box t))
                   :box (:line-width 1 :color ,border :style released-button))
                  (t :underline ,border)))
               `(custom-button-pressed
-                ((default :background ,bg-main :foreground ,fg-accent)
+                ((default :inherit variable-pitch :background ,bg-main :foreground ,fg-accent)
                  (((supports :box t))
                   :box (:line-width 1 :color ,border :style pressed-button))
                  (t :underline ,border)))
@@ -1601,6 +1601,16 @@ default a generic text that mentions the BACKGROUND-MODE."
               `(org-drawer ((t :inherit fixed-pitch :foreground ,fg-shadow-subtle)))
               `(org-ellipsis (( ))) ; inherits from the heading's color
               '(org-formula ((t :inherit fixed-pitch)))
+
+              `(org-habit-alert-face ((t :background ,(doric-themes-adjust-value "#ffff00" 10) :foreground "black")))
+              `(org-habit-alert-future-face ((t :background ,(doric-themes-adjust-value "#ffff00" 50) :foreground "white")))
+              `(org-habit-clear-face ((t :background ,(doric-themes-adjust-value "#0000dd" 10) :foreground "white")))
+              `(org-habit-clear-future-face ((t :background ,(doric-themes-adjust-value "#0000dd" 50) :foreground "white")))
+              `(org-habit-overdue-face ((t :background ,(doric-themes-adjust-value "#dd0000" 10) :foreground "white")))
+              `(org-habit-overdue-future-face ((t :background ,(doric-themes-adjust-value "#dd0000" 50) :foreground "black")))
+              `(org-habit-ready-face ((t :background ,(doric-themes-adjust-value "#00bb00" 10) :foreground "white")))
+              `(org-habit-ready-future-face ((t :background ,(doric-themes-adjust-value "#00bb00" 50) :foreground "white")))
+
               `(org-hide ((t :foreground ,bg-main)))
               `(org-indent ((t :inherit (fixed-pitch org-hide))))
               `(org-meta-line ((t :inherit fixed-pitch :foreground ,fg-shadow-subtle)))
