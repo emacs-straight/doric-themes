@@ -46,12 +46,14 @@
     doric-light
     doric-marble
     doric-oak
+    doric-siren
     doric-wind)
   "Light themes.")
 
 (defconst doric-themes-dark-themes
   '(doric-dark
     doric-fire
+    doric-mermaid
     doric-obsidian
     doric-pine
     doric-plum
