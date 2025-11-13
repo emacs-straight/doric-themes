@@ -42,19 +42,19 @@
     (require 'doric-themes))
 
   (defvar doric-mermaid-palette
-    '((cursor "#c0acf0")
-      (bg-main "#3a2f48")
+    '((cursor "#e08ca0")
+      (bg-main "#2a2f48")
       (fg-main "#dde0f8")
-      (border "#9580aa")
+      (border "#757a90")
 
-      (bg-shadow-subtle "#423c55")
-      (fg-shadow-subtle "#aea6c3")
+      (bg-shadow-subtle "#3c3e55")
+      (fg-shadow-subtle "#aea7c3")
 
-      (bg-neutral "#574b67")
+      (bg-neutral "#4c4f67")
       (fg-neutral "#d8d0e6")
 
-      (bg-shadow-intense "#4f5087")
-      (fg-shadow-intense "#b4a3ee")
+      (bg-shadow-intense "#424381")
+      (fg-shadow-intense "#c4abfe")
 
       (bg-accent "#573f5d")
       (fg-accent "#e8add2")
