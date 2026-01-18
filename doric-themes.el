@@ -5,7 +5,7 @@
 ;; Author: Protesilaos Stavrou <info@protesilaos.com>
 ;; Maintainer: Protesilaos Stavrou <info@protesilaos.com>
 ;; URL: https://github.com/protesilaos/doric-themes
-;; Version: 0.5.0
+;; Version: 0.6.0
 ;; Package-Requires: ((emacs "29.1"))
 ;; Keywords: faces, theme, accessibility
 
@@ -321,12 +321,7 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
 ;;;; Face customisations
 
 (defconst doric-themes-selection-faces
-  '(avy-goto-char-timer-face
-    avy-lead-face
-    avy-lead-face-0
-    avy-lead-face-1
-    avy-lead-face-2
-    completions-highlight
+  '(completions-highlight
     consult-highlight-mark
     consult-highlight-match
     consult-preview-insertion
@@ -352,7 +347,12 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     vertico-current))
 
 (defconst doric-themes-intense-shadow-faces
-  '(blink-matching-paren-offscreen
+  '(avy-goto-char-timer-face
+    avy-lead-face
+    avy-lead-face-0
+    avy-lead-face-1
+    avy-lead-face-2
+    blink-matching-paren-offscreen
     company-template-field
     company-tooltip-selection
     company-tooltip-scrollbar-thumb
@@ -1414,7 +1414,7 @@ default to a generic text that mentions the BACKGROUND-MODE."
   (unless (memq background-mode '(light dark))
     (error "The BACKGROUND-MODE must be either `light' or `dark'"))
   (if-let* ((palette (symbol-value (intern (format "%s-palette" name)))))
-      (let ((theme-exists-p (custom-theme-p name)))
+      (let ((theme-exists-p (get name 'theme-feature)))
         `(progn
            ,@(unless theme-exists-p
                (list `(custom-declare-theme
@@ -1729,6 +1729,22 @@ default to a generic text that mentions the BACKGROUND-MODE."
               `(reb-match-2 ((t :background ,bg-accent :foreground ,fg-accent)))
               `(reb-match-3 ((t :background ,bg-shadow-intense :foreground ,fg-shadow-intense)))
 
+              ;; NOTE 2025-10-24: All the faces of `ruler-mode' need to inherit
+              ;; from `default' to yield the expected results.  Otherwise the
+              ;; ruler is shorter.  I am not sure what is happening, but it
+              ;; seems important.  Its default face definitions also inherit
+              ;; from `default' and then from `ruler-mode-default'.
+              `(ruler-mode-column-number ((t :inherit default :background ,bg-shadow-subtle :foreground ,fg-shadow-subtle)))
+              `(ruler-mode-comment-column ((t :inherit default :foreground ,fg-green)))
+              `(ruler-mode-current-column ((t :inherit default :background ,bg-shadow-intense :foreground ,fg-shadow-intense)))
+              `(ruler-mode-default ((t :inherit default :background ,bg-shadow-subtle :foreground ,fg-shadow-subtle)))
+              `(ruler-mode-fill-column ((t :inherit default :foreground ,fg-green)))
+              `(ruler-mode-fringes ((t :inherit default :foreground ,fg-shadow-subtle)))
+              `(ruler-mode-goal-column ((t :inherit default :foreground ,fg-green)))
+              `(ruler-mode-margins ((t :inherit default :foreground ,bg-main)))
+              `(ruler-mode-pad ((t :inherit default :background ,bg-accent :foreground ,fg-accent)))
+              `(ruler-mode-tab-stop ((t :inherit default :foreground ,fg-yellow)))
+
               `(spacious-padding-line-active ((t :foreground ,fg-accent)))
               `(spacious-padding-line-inactive ((t :foreground ,bg-accent)))
               `(spacious-padding-subtle-mode-line-active ((t :foreground ,fg-accent)))
@@ -1746,6 +1762,13 @@ default to a generic text that mentions the BACKGROUND-MODE."
               '(telega-webpage-preformatted ((t :inherit fixed-pitch)))
 
               '(textsec-suspicious (( )))
+
+              `(tmr-mode-line-active ((t :inherit bold)))
+              `(tmr-mode-line-soon ((t :inherit bold :foreground ,fg-yellow)))
+              `(tmr-mode-line-urgent ((t :inherit bold :foreground ,fg-red)))
+              `(tmr-tabulated-end-time ((t :foreground ,fg-red)))
+              `(tmr-tabulated-remaining-time ((t :foreground ,fg-yellow)))
+              `(tmr-tabulated-start-time ((t :foreground ,fg-cyan)))
 
               `(transient-key-exit ((t :inherit (fixed-pitch bold-italic) :foreground ,fg-red)))
               `(transient-key-noop ((t :inherit fixed-pitch :foreground ,fg-shadow-subtle)))
