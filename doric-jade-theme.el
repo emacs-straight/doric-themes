@@ -42,7 +42,7 @@
     (require 'doric-themes))
 
   (defvar doric-jade-palette
-    '((cursor "#00a073")
+    '((cursor "#00a093")
       (bg-main "#e2f0c9")
       (fg-main "#25311f")
       (border "#98a09a")
@@ -53,11 +53,11 @@
       (bg-neutral "#d2cea9")
       (fg-neutral "#605258")
 
-      (bg-shadow-intense "#a4c98f")
-      (fg-shadow-intense "#007000")
+      (bg-shadow-intense "#74d98f")
+      (fg-shadow-intense "#006000")
 
-      (bg-accent "#e7dea1")
-      (fg-accent "#704920")
+      (bg-accent "#cce2e4")
+      (fg-accent "#106870")
 
       (fg-red "#990020")
       (fg-green "#006710")
