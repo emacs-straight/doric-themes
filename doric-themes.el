@@ -703,7 +703,10 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
 (defconst doric-themes-bold-accent-foreground-only-faces
   '(diary
     magit-diff-file-heading
-    org-imminent-deadline))
+    org-agenda-structure
+    org-document-title
+    org-imminent-deadline
+    notmuch-tag-unread))
 
 (defconst doric-themes-main-foreground-only-faces
   '(border
@@ -788,8 +791,6 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     next-error-message
     nobreak-hyphen
     nobreak-space
-    notmuch-tag-unread
-    notmuch-tag-flagged
     org-agenda-current-time
     org-agenda-filter-category
     org-agenda-filter-effort
@@ -935,8 +936,6 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     minibuffer-prompt
     mode-line-buffer-id
     mode-line-emphasis
-    org-agenda-date
-    org-document-title
     proced-emacs-pid
     proced-sort-header
     rcirc-prompt
@@ -958,7 +957,6 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     so-long-mode-line-active
     telega-chat-prompt
     texinfo-heading
-    transient-heading
     trashed-directory
     vc-conflict-state
     vc-dir-header
@@ -975,11 +973,11 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     ztreep-header-face))
 
 (defconst doric-themes-bold-intense-faces
-  '(dired-header
+  '(change-log-list
+    dired-header
     diredfl-dir-heading
     elfeed-search-unread-title-face
     elisp-throw-tag
-    git-commit-comment-heading
     git-commit-summary
     line-number-current-line
     log-edit-header
@@ -997,7 +995,7 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     notmuch-crypto-signature-good
     notmuch-crypto-signature-good-key
     notmuch-crypto-signature-unknown
-    org-agenda-structure
+    org-agenda-date
     org-level-1
     org-level-2
     org-level-3
@@ -1018,13 +1016,13 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     outline-6
     outline-7
     outline-8
-    package-help-section-name))
+    package-help-section-name
+    transient-heading))
 
 (defconst doric-themes-bold-italic-faces
   '(appt-notification
     aw-key-face
     change-log-conditionals
-    change-log-list
     comint-highlight-input
     compilation-error
     completions-group-title
@@ -1061,6 +1059,7 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     git-commit-comment-action
     git-commit-comment-branch-remote
     git-commit-comment-branch-local
+    git-commit-comment-heading
     gnus-emphasis-bold-italic
     gnus-server-denied
     ibuffer-locked-buffer
@@ -1073,6 +1072,7 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     marginalia-file-priv-dir
     marginalia-key
     message-mml
+    org-macro
     org-mode-line-clock-overrun
     package-status-avail-obso
     package-status-disabled
@@ -1151,7 +1151,6 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     org-agenda-structure-secondary
     org-inline-src-block
     org-latex-and-related
-    org-macro
     org-priority
     package-description
     rcirc-dim-nick
@@ -1217,14 +1216,9 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     denote-faces-link
     denote-faces-query-link
     dictionary-reference-face
-    dired-symlink
-    diredfl-symlink
-    eshell-ls-symlink
     info-node
     info-xref
-    info-xref-visited
     link
-    link-visited
     marginalia-file-priv-link
     org-cite
     org-cite-key
@@ -1233,6 +1227,14 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     package-name
     rcirc-url
     shr-link))
+
+(defconst doric-themes-underline-subtle-shadow-faces
+  '(dired-symlink
+    diredfl-symlink
+    eshell-ls-symlink
+    info-xref-visited
+    link-visited
+    org-agenda-structure-filter))
 
 (defconst doric-themes-diff-added-faces
   '(denote-faces-prompt-new-name
@@ -1321,6 +1323,7 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     font-latex-warning-face
     font-lock-escape-facex
     font-lock-warning-face
+    notmuch-tag-flagged
     warning))
 
 (defconst doric-themes-success-foreground-only-faces
@@ -1338,6 +1341,7 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
   '(flycheck-error
     flyspell-incorrect
     flymake-error
+    notmuch-tag-deleted
     writegood-duplicates-face))
 
 (defconst doric-themes-warning-underline-faces
@@ -1525,6 +1529,7 @@ default to a generic text that mentions the BACKGROUND-MODE."
               ,@(doric-themes-prepare-faces doric-themes-italic-faces :inherit ''italic :foreground 'fg-shadow-subtle)
               ,@(doric-themes-prepare-faces doric-themes-italic-only-faces :inherit ''italic)
               ,@(doric-themes-prepare-faces doric-themes-underline-link-faces :inherit ''underline :foreground 'fg-accent)
+              ,@(doric-themes-prepare-faces doric-themes-underline-subtle-shadow-faces :inherit ''underline :foreground 'fg-shadow-subtle)
               ,@(doric-themes-prepare-faces doric-themes-underline-emphasis-faces :inherit ''(underline italic) :foreground 'fg-shadow-subtle)
               ,@(doric-themes-prepare-faces doric-themes-underline-emphasis-subtle-faces :underline 'border)
 
@@ -1673,7 +1678,7 @@ default to a generic text that mentions the BACKGROUND-MODE."
                  (t :underline ,border)))
 
               `(notmuch-message-summary-face
-                ((default :background ,bg-shadow-subtle)
+                ((default :inherit bold :background ,bg-shadow-subtle)
                  (((supports :overline t))
                   :overline ,fg-shadow-subtle)))
 
@@ -1685,7 +1690,7 @@ default to a generic text that mentions the BACKGROUND-MODE."
               `(org-block-begin-line ((t :inherit fixed-pitch :background ,bg-neutral :foreground ,fg-neutral :extend t)))
               `(org-block-end-line ((t :inherit org-block-begin-line)))
               '(org-checkbox ((t :inherit (fixed-pitch bold))))
-              `(org-code ((t :inherit (fixed-pitch italic) :foreground ,fg-shadow-subtle)))
+              `(org-code ((t :inherit (fixed-pitch italic) :foreground ,fg-shadow-intense)))
               `(org-column-title ((t :inherit fixed-pitch :foreground ,fg-shadow-subtle)))
               `(org-date-selected
                 ((default :foreground ,fg-accent :inverse-video t)
