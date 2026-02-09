@@ -337,7 +337,6 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     markdown-highlighting-face
     mode-line-highlight
     next-error
-    org-dispatcher-highlight
     proced-marked
     pulse-highlight-start-face
     rectangle-preview
@@ -400,7 +399,6 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     font-lock-function-call-face
     haskell-constructor-face
     mm-uu-extract
-    magit-log-author
     magit-log-date
     marginalia-date
     message-header-cc
@@ -443,7 +441,6 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     menu
     message-separator
     mu4e-region-code
-    org-agenda-diary
     org-agenda-restriction-lock
     org-clock-overlay
     secondary-selection
@@ -506,6 +503,7 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     breadcrumb-face
     calendar-weekend-header
     change-log-email
+    change-log-name
     compilation-column-number
     compilation-line-number
     consult-grep-context
@@ -554,6 +552,7 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     line-number
     magit-diff-context
     magit-log-graph
+    magit-log-author
     marginalia-documentation
     marginalia-file-name
     marginalia-file-priv-no
@@ -829,7 +828,6 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     breadcrumb-project-leaf-face
     buffer-menu-buffer
     calendar-month-header
-    change-log-name
     change-log-file
     circe-prompt-face
     comint-highlight-prompt
@@ -1004,7 +1002,6 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     org-level-6
     org-level-7
     org-level-8
-    org-list-dt
     org-table-header
     org-tag-group
     org-target
@@ -1148,6 +1145,7 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     notmuch-wash-cited-text
     org-agenda-calendar-event
     org-agenda-calendar-sexp
+    org-agenda-diary
     org-agenda-structure-secondary
     org-inline-src-block
     org-latex-and-related
@@ -1319,6 +1317,7 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
   '(TeX-error-description-warning
     elisp-non-local-exit
     elisp-warning-type
+    emacs-news-does-not-need-documentation
     flymake-warning-fringe
     font-latex-warning-face
     font-lock-escape-facex
@@ -1329,6 +1328,7 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
 (defconst doric-themes-success-foreground-only-faces
   '(TeX-error-description-help
     TeX-error-description-tex-said
+    emacs-news-is-documented
     ert-test-result-expected
     flymake-note-fringe
     org-agenda-done
@@ -1696,7 +1696,19 @@ default to a generic text that mentions the BACKGROUND-MODE."
                 ((default :foreground ,fg-accent :inverse-video t)
                  (((supports :box t))
                   :box (:line-width (-1 . -1) :color ,fg-main))))
+              ;; NOTE 2026-02-08: Adapted from my `modus-themes'.
+              ;;
+              ;; NOTE 2024-03-17: Normally we do not want to add this padding
+              ;; with the :box, but I do it here because the keys are otherwise
+              ;; very hard to read.  The square brackets around them are not
+              ;; colored, which is what is causing the problem.
+              `(org-dispatcher-highlight
+                ((default :inherit bold :background ,bg-shadow-intense :foreground ,fg-shadow-intense)
+                 (((supports :box t))
+                  :box (:line-width 2 :style flat-button)))
+                 (t :underline ,border))
               `(org-document-info-keyword ((t :inherit fixed-pitch :foreground ,fg-shadow-subtle)))
+              `(org-list-dt ((t :inherit bold)))
               `(org-drawer ((t :inherit fixed-pitch :foreground ,fg-shadow-subtle)))
               `(org-ellipsis (( ))) ; inherits from the heading's color
               '(org-formula ((t :inherit fixed-pitch)))
@@ -1809,6 +1821,25 @@ default to a generic text that mentions the BACKGROUND-MODE."
            ,@(unless theme-exists-p
                (list `(provide-theme ',name)))))
     (error "No palette found for `%s'" name)))
+
+(defun doric-themes--with-colors-subr (&rest body)
+  "Evaluate BODY for `doric-themes-with-colors'."
+  (condition-case data
+      (when-let* ((theme (doric-themes--current-theme))
+                  (palette-symbol (intern-soft (format "%s-palette" theme)))
+                  (_ (boundp palette-symbol))
+                  (palette (symbol-value palette-symbol)))
+        (eval
+         `(let (,@palette)
+            ,body)))
+    (error (message "Error in doric-themes-with-colors: %s" data))))
+
+;;;###autoload
+(defmacro doric-themes-with-colors (&rest body)
+  "Evaluate BODY with current Doric theme's palette `let' bound."
+  (declare (indent 0))
+  `(doric-themes--with-colors-subr
+    (lambda () ,@body)))
 
 ;;;; Add themes from package to path
 
