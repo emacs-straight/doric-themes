@@ -5,7 +5,7 @@
 ;; Author: Protesilaos Stavrou <info@protesilaos.com>
 ;; Maintainer: Protesilaos Stavrou <info@protesilaos.com>
 ;; URL: https://github.com/protesilaos/doric-themes
-;; Version: 0.6.0
+;; Version: 1.0.0
 ;; Package-Requires: ((emacs "29.1"))
 ;; Keywords: faces, theme, accessibility
 
@@ -343,8 +343,6 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     speedbar-highlight-face
     tab-bar-tab-highlight
     tab-line-highlight
-    transient-enabled-suffix
-    transient-value
     vertico-current))
 
 (defconst doric-themes-intense-shadow-faces
@@ -371,8 +369,7 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     region
     show-paren-match
     speedbar-separator-face
-    substitute-match
-    transient-argument))
+    substitute-match))
 
 (defconst doric-themes-intense-shadow-foreground-only-faces
   '(calendar-weekday-header
@@ -398,11 +395,11 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     font-lock-function-name-face
     font-lock-function-call-face
     haskell-constructor-face
-    mm-uu-extract
     magit-log-date
     marginalia-date
     message-header-cc
     message-header-other
+    mm-uu-extract
     notmuch-search-date
     org-agenda-calendar-daterange
     org-agenda-column-dateline
@@ -447,7 +444,6 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     show-paren-match-expression
     tab-bar
     tab-line
-    transient-disabled-suffix
     tool-bar
     vc-dir-status-ignored
     widget-documentation
@@ -627,7 +623,9 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     notmuch-tree-match-tag-face
     notmuch-tree-no-match-date-face
     notmuch-tree-no-match-face
-    org-agenda-dimmed-todo-face
+    org-agenda-calendar-event
+    org-agenda-calendar-sexp
+    org-agenda-diary
     org-column
     org-special-keyword
     org-tag
@@ -701,6 +699,10 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
 
 (defconst doric-themes-bold-accent-foreground-only-faces
   '(diary
+    magit-branch-local
+    magit-branch-remote
+    magit-branch-remote-head
+    magit-branch-upstream
     magit-diff-file-heading
     org-agenda-structure
     org-document-title
@@ -790,11 +792,6 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     next-error-message
     nobreak-hyphen
     nobreak-space
-    org-agenda-current-time
-    org-agenda-filter-category
-    org-agenda-filter-effort
-    org-agenda-filter-regexp
-    org-agenda-filter-tags
     org-archived
     org-default
     org-document-info
@@ -920,10 +917,6 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     info-title-4
     keycast-command
     log-edit-summary
-    magit-branch-local
-    magit-branch-remote
-    magit-branch-remote-head
-    magit-branch-upstream
     magit-mode-line-process
     magit-process-ok
     magit-signature-good
@@ -979,6 +972,7 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     git-commit-summary
     line-number-current-line
     log-edit-header
+    magit-branch-current
     magit-section-heading
     markdown-header-face-1
     markdown-header-face-2
@@ -993,7 +987,12 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     notmuch-crypto-signature-good
     notmuch-crypto-signature-good-key
     notmuch-crypto-signature-unknown
+    org-agenda-current-time
     org-agenda-date
+    org-agenda-filter-category
+    org-agenda-filter-effort
+    org-agenda-filter-regexp
+    org-agenda-filter-tags
     org-level-1
     org-level-2
     org-level-3
@@ -1069,6 +1068,7 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     marginalia-file-priv-dir
     marginalia-key
     message-mml
+    org-agenda-dimmed-todo-face
     org-macro
     org-mode-line-clock-overrun
     package-status-avail-obso
@@ -1132,7 +1132,6 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     help-argument-name
     holiday
     line-number-minor-tick
-    magit-branch-current
     magit-cherry-unmatched
     magit-signature-error
     magit-signature-expired
@@ -1143,9 +1142,6 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     markdown-blockquote-face
     markdown-inline-code-face
     notmuch-wash-cited-text
-    org-agenda-calendar-event
-    org-agenda-calendar-sexp
-    org-agenda-diary
     org-agenda-structure-secondary
     org-inline-src-block
     org-latex-and-related
@@ -1241,6 +1237,7 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     magit-diff-added
     magit-diffstat-added
     smerge-lower
+    transient-enabled-suffix
     ztreep-diff-model-add-face))
 
 (defconst doric-themes-diff-added-highlight-faces
@@ -1260,7 +1257,8 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     diff-changed-unspecified
     diff-indicator-changed
     magit-diff-base
-    smerge-base))
+    smerge-base
+    transient-value))
 
 (defconst doric-themes-diff-changed-highlight-faces
   '(diff-hl-change
@@ -1272,7 +1270,8 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
 (defconst doric-themes-diff-changed-refine-faces
   '(diff-refine-changed
     ediff-fine-diff-C
-    smerge-refined-changed))
+    smerge-refined-changed
+    transient-argument))
 
 (defconst doric-themes-diff-removed-faces
   '(denote-faces-prompt-old-name
@@ -1281,6 +1280,7 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     magit-diff-removed
     magit-diffstat-removed
     smerge-upper
+    transient-disabled-suffix
     ztreep-diff-model-diff-face))
 
 (defconst doric-themes-diff-removed-highlight-faces
@@ -1725,7 +1725,7 @@ default to a generic text that mentions the BACKGROUND-MODE."
               `(org-hide ((t :foreground ,bg-main)))
               `(org-indent ((t :inherit (fixed-pitch org-hide))))
               `(org-meta-line ((t :inherit fixed-pitch :foreground ,fg-shadow-subtle)))
-              '(org-property-value ((t :inherit fixed-pitch)))
+              `(org-property-value ((t :inherit fixed-pitch :foreground ,fg-accent)))
               '(org-quote ((t :inherit (italic org-block))))
               `(org-verbatim ((t :inherit (fixed-pitch italic) :foreground ,fg-shadow-subtle)))
               '(org-verse ((t :inherit org-block)))
