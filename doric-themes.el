@@ -40,7 +40,8 @@
 (eval-when-compile (require 'subr-x))
 
 (defconst doric-themes-light-themes
-  '(doric-beach
+  '(doric-almond
+    doric-beach
     doric-cherry
     doric-earth
     doric-jade
@@ -55,6 +56,7 @@
   '(doric-copper
     doric-dark
     doric-fire
+    doric-magma
     doric-mermaid
     doric-obsidian
     doric-pine
