@@ -43,6 +43,7 @@
   '(doric-almond
     doric-beach
     doric-cherry
+    doric-coral
     doric-earth
     doric-jade
     doric-light
@@ -62,6 +63,7 @@
     doric-pine
     doric-plum
     doric-valley
+    doric-walnut
     doric-water)
   "Dark themes.")
 
