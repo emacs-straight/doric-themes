@@ -50,6 +50,7 @@
     doric-marble
     doric-oak
     doric-siren
+    doric-tiger
     doric-wind)
   "Light themes.")
 
@@ -57,6 +58,7 @@
   '(doric-copper
     doric-dark
     doric-fire
+    doric-lion
     doric-magma
     doric-mermaid
     doric-obsidian
@@ -955,6 +957,7 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     trashed-directory
     vc-conflict-state
     vc-dir-header
+    vc-dir-key-binding-hint-label
     vc-dir-status-warning
     vc-locked-state
     vc-missing-state
