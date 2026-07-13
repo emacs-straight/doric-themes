@@ -5,7 +5,7 @@
 ;; Author: Protesilaos <info@protesilaos.com>
 ;; Maintainer: Protesilaos <info@protesilaos.com>
 ;; URL: https://github.com/protesilaos/doric-themes
-;; Version: 1.1.0
+;; Version: 1.2.0
 ;; Package-Requires: ((emacs "29.1"))
 ;; Keywords: faces, theme, accessibility
 
@@ -130,8 +130,7 @@ This is used by the commands `doric-themes-toggle',
 (defun doric-themes--enable-themes ()
   "Enable the Doric themes."
   (dolist (theme doric-themes-collection)
-    (unless (memq theme custom-known-themes)
-      (load-theme theme :no-confirm :no-enable))))
+    (load-theme theme :no-confirm :no-enable)))
 
 (defun doric-themes--list-known-themes ()
   "Return list of `custom-known-themes' matching `doric-themes--doric-p'."
