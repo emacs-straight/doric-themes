@@ -47,6 +47,7 @@
     doric-earth
     doric-jade
     doric-light
+    doric-lilac
     doric-marble
     doric-oak
     doric-siren
@@ -55,7 +56,8 @@
   "Light themes.")
 
 (defconst doric-themes-dark-themes
-  '(doric-copper
+  '(doric-borage
+    doric-copper
     doric-dark
     doric-fire
     doric-lion
