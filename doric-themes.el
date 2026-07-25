@@ -585,6 +585,7 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     message-header-newsgroups
     message-header-xheader
     mu4e-header-face
+    mu4e-thread-fold-face
     nerd-icons-blue
     nerd-icons-blue-alt
     nerd-icons-completion-dir-face

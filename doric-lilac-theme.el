@@ -42,7 +42,7 @@
     (require 'doric-themes))
 
   (defvar doric-lilac-palette
-    '((cursor "#a07f50")
+    '((cursor "#906f20")
       (bg-main "#f2f0e7")
       (fg-main "#1a3530")
       (border "#8f9373")
@@ -60,7 +60,7 @@
       (fg-accent "#435a00")
 
       (fg-red "#982500")
-      (fg-green "#226700")
+      (fg-green "#005700")
       (fg-yellow "#595000")
       (fg-blue "#103077")
       (fg-magenta "#700054")
