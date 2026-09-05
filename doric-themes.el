@@ -5,7 +5,7 @@
 ;; Author: Protesilaos <info@protesilaos.com>
 ;; Maintainer: Protesilaos <info@protesilaos.com>
 ;; URL: https://github.com/protesilaos/doric-themes
-;; Version: 1.2.1
+;; Version: 1.3.0
 ;; Package-Requires: ((emacs "29.1"))
 ;; Keywords: faces, theme, accessibility
 
@@ -248,7 +248,7 @@ Run `doric-themes-after-load-theme-hook' after loading the theme."
 (defun doric-themes--rotate (themes)
   "Rotate THEMES rightward such that the car is moved to the end."
   (if (proper-list-p themes)
-      (let* ((index (seq-position themes (doric-themes--current-theme)))
+      (let* ((index (or (seq-position themes (doric-themes--current-theme)) -1))
              (offset (1+ index)))
         (append (nthcdr offset themes) (take offset themes)))
     (error "The `%s' is not a list" themes)))
@@ -280,6 +280,20 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
           (message "Rotating to `%s'" (propertize (symbol-name candidate) 'face 'bold))
           (doric-themes-load-theme candidate))
       (user-error "`%s' is not part of the Doric collection" candidate))))
+
+;;;###autoload
+(defun doric-themes-rotate-light ()
+  "Like `doric-themes-rotate' but only for the light themes."
+  (declare (interactive-only t))
+  (interactive)
+  (doric-themes-rotate doric-themes-light-themes))
+
+;;;###autoload
+(defun doric-themes-rotate-dark ()
+  "Like `doric-themes-rotate' but only for the dark themes."
+  (declare (interactive-only t))
+  (interactive)
+  (doric-themes-rotate doric-themes-dark-themes))
 
 (defun doric-themes--minus-current (&optional variant)
   "Return list of Doric themes minus the current one.
@@ -328,6 +342,20 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
          (match (or (nth (random (length themes)) themes) (car themes))))
     (doric-themes-load-theme match)
     (message "Loaded `%s'" (propertize (symbol-name match) 'face 'bold))))
+
+;;;###autoload
+(defun doric-themes-load-random-light ()
+  "Like `doric-themes-load-random' but only for light themes."
+  (declare (interactive-only t))
+  (interactive)
+  (doric-themes-load-random 'light))
+
+;;;###autoload
+(defun doric-themes-load-random-dark ()
+  "Like `doric-themes-load-random' but only for dark themes."
+  (declare (interactive-only t))
+  (interactive)
+  (doric-themes-load-random 'dark))
 
 ;;;; Face customisations
 
@@ -400,6 +428,7 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     elisp-function
     epa-field-body
     epa-field-name
+    erc-keyword-face
     eshell-ls-readonly
     font-lock-function-name-face
     font-lock-function-call-face
@@ -540,6 +569,9 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     edebug-disabled-breakpoint
     elfeed-search-title-face
     epa-validity-disabled
+    erc-direct-msg-face
+    erc-fill-wrap-merge-indicator-face
+    erc-fool-face
     eshell-ls-unreadable
     file-name-shadow
     font-latex-sedate-face
@@ -667,6 +699,8 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     diredfl-executable-tag
     elfeed-search-feed-face
     epa-validity-high
+    erc-input-face
+    erc-timestamp-face
     escape-glyph
     eshell-ls-executable
     eshell-ls-special
@@ -701,6 +735,7 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
 
 (defconst doric-themes-bold-accent-foreground-only-faces
   '(diary
+    erc-command-indicator-face
     magit-branch-local
     magit-branch-remote
     magit-branch-remote-head
@@ -866,6 +901,9 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     elfeed-log-warn-level-face
     elisp-macro
     elisp-special-form
+    erc-bold-face
+    erc-nick-default-face
+    erc-pal-face
     erc-prompt-face
     eshell-ls-archive
     eshell-ls-backup
@@ -979,6 +1017,7 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     elfeed-search-unread-count-face
     elfeed-search-unread-title-face
     elisp-throw-tag
+    erc-action-face
     git-commit-summary
     gnus-header-name
     line-number-current-line
@@ -1059,6 +1098,9 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     elisp-shorthand-font-lock-face
     elisp-slot
     elisp-symbol-role-definition
+    erc-current-nick-face
+    erc-my-nick-face
+    erc-my-nick-prefix-face
     eww-invalid-certificate
     font-lock-builtin-face
     font-lock-preprocessor-face
@@ -1191,10 +1233,9 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     company-tooltip-common-selection
     completions-common-part
     completions-first-difference
-    completion-preview-common
-    completion-preview-exact
     consult-preview-match
     custom-visibility
+    erc-underline-face
     font-latex-underline-face
     gnus-emphasis-highlight-words
     lazy-highlight
@@ -1229,6 +1270,7 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     denote-faces-link
     denote-faces-query-link
     dictionary-reference-face
+    erc-button
     info-node
     info-xref
     link
@@ -1335,6 +1377,8 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
 (defconst doric-themes-error-foreground-only-faces
   '(TeX-error-description-error
     dired-broken-symlink
+    erc-dangerous-host-face
+    erc-error-face
     error
     ert-test-result-unexpected
     flymake-error-echo
@@ -1350,6 +1394,8 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     elisp-non-local-exit
     elisp-warning-type
     emacs-news-does-not-need-documentation
+    erc-nick-msg-face
+    erc-nick-prefix-face
     flymake-warning-echo
     font-latex-warning-face
     font-lock-escape-facex
@@ -1361,6 +1407,7 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
   '(TeX-error-description-help
     TeX-error-description-tex-said
     emacs-news-is-documented
+    erc-keep-place-indicator-arrow
     ert-test-result-expected
     flymake-note-echo
     org-agenda-done
@@ -1419,6 +1466,7 @@ Run `doric-themes-after-load-theme-hook' after loading a theme."
     diredfl-flag-mark
     diredfl-flag-mark-line
     ibuffer-marked
+    log-view-marked
     package-mark-install-line
     trashed-marked))
 
@@ -1516,6 +1564,10 @@ default to a generic text that mentions the BACKGROUND-MODE."
 
               `(company-tooltip ((t :inherit fixed-pitch :background ,bg-shadow-subtle :foreground ,fg-shadow-subtle)))
 
+              `(completion-preview ((t :foreground ,fg-shadow-subtle)))
+              `(completion-preview-common ((t :inherit completion-preview :underline t)))
+              `(completion-preview-exact ((t :inherit (bold completion-preview) :underline t)))
+
               `(corfu-default ((t :inherit fixed-pitch :background ,bg-shadow-subtle :foreground ,fg-shadow-subtle)))
 
               `(custom-button
@@ -1606,6 +1658,8 @@ default to a generic text that mentions the BACKGROUND-MODE."
               '(elisp-widget-type (( )))
 
               '(embark-keybinding ((t :inherit (fixed-pitch bold-italic))))
+
+              `(erc-notice-face ((t :inherit italic :foreground ,fg-accent)))
 
               `(flymake-eol-information-face ((t :inherit italic :height 0.9)))
               `(flymake-error-echo-at-eol ((t :inherit italic :foreground ,fg-red :height 0.9)))
