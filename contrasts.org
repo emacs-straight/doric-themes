@@ -38,6 +38,49 @@ C1 and C2 are color values written in hexadecimal RGB."
 (defalias #'Λ #'modus-themes-contrast)
 #+end_src
 
+This helps create a new table. Better this way than write a keyboard
+macro each time:
+
+#+begin_src emacs-lisp
+(defun prot/doric-themes-prepare-contrast-table ()
+  "Prepare contrast table for the current Doric theme."
+  (interactive)
+  (unless (string-match-p "doric.*theme.el\\'" buffer-file-name)
+    (error "Call this inside of a Doric theme file"))
+  (let* ((fn (lambda (strings)
+               (save-excursion
+                 (let ((collection nil))
+                   (goto-char (point-min))
+                   (dolist (bg strings)
+                     (re-search-forward bg)
+                     (re-search-forward "#[0-9a-f]\\{,6\\}")
+                     (push (match-string-no-properties 0) collection))
+                   (nreverse collection)))))
+         (background-strings '("bg-main" "bg-shadow-subtle" "bg-neutral" "bg-shadow-intense" "bg-accent"))
+         (foreground-strings '( "fg-main" "fg-shadow-subtle" "fg-neutral" "fg-shadow-intense" "fg-accent"
+                                "fg-red" "fg-green" "fg-yellow" "fg-blue" "fg-magenta" "fg-cyan"))
+         (backgrounds (funcall fn background-strings))
+         (foregrounds (funcall fn foreground-strings))
+         (index 0))
+    (with-temp-buffer
+      (insert "| | | bg-main | bg-shadow-subtle | bg-neutral | bg-shadow-intense | bg-accent |\n")
+      (insert (format "| Name | | %s | %s | %s | %s | %s |\n"
+                      (nth 0 backgrounds)
+                      (nth 1 backgrounds)
+                      (nth 2 backgrounds)
+                      (nth 3 backgrounds)
+                      (nth 4 backgrounds)))
+      (insert "|-\n")
+      (dolist (name foreground-strings)
+        (insert (format "| %s | %s |\n" name (nth index foregrounds)))
+        (setq index (+ index 1))
+        (when (= index 5)
+          (insert "|-\n")))
+      (insert "#+TBLFM: $3='(Λ $2 @2$3);%.2f :: $4='(Λ $2 @2$4);%.2f :: $5='(Λ $2 @2$5);%.2f :: $6='(Λ $2 @2$6);%.2f :: $7='(Λ $2 @2$7);%.2f\n")
+      (kill-new (buffer-string)))
+    (message "Copied contrast table for %s" (file-name-nondirectory buffer-file-name))))
+#+end_src
+
 * Light themes
 :PROPERTIES:
 :CUSTOM_ID: h:light-themes
@@ -239,6 +282,28 @@ C1 and C2 are color values written in hexadecimal RGB."
 | fg-blue           | #103077 |   10.48 |             9.21 |       7.72 |              5.66 |      8.68 |
 | fg-magenta        | #700d50 |    9.63 |             8.46 |       7.09 |              5.20 |      7.98 |
 | fg-cyan           | #005355 |    7.57 |             6.65 |       5.58 |              4.09 |      6.27 |
+#+TBLFM: $3='(Λ $2 @2$3);%.2f :: $4='(Λ $2 @2$4);%.2f :: $5='(Λ $2 @2$5);%.2f :: $6='(Λ $2 @2$6);%.2f :: $7='(Λ $2 @2$7);%.2f
+
+** Doric Meadow
+:PROPERTIES:
+:CUSTOM_ID: h:doric-meadow
+:END:
+
+|                   |         | bg-main | bg-shadow-subtle | bg-neutral | bg-shadow-intense | bg-accent |
+| Name              |         | #eaf0c0 |          #e0e2be |    #d0d2b0 |           #b8e0a7 |   #ecdb9f |
+|-------------------+---------+---------+------------------+------------+-------------------+-----------|
+| fg-main           | #023f2d |   10.12 |             9.02 |       7.72 |              8.14 |      8.68 |
+| fg-shadow-subtle  | #60504a |    6.46 |             5.76 |       4.93 |              5.20 |      5.54 |
+| fg-neutral        | #53402f |    8.27 |             7.37 |       6.31 |              6.66 |      7.10 |
+| fg-shadow-intense | #206502 |    6.06 |             5.40 |       4.63 |              4.88 |      5.20 |
+| fg-accent         | #753100 |    8.07 |             7.19 |       6.16 |              6.49 |      6.92 |
+|-------------------+---------+---------+------------------+------------+-------------------+-----------|
+| fg-red            | #982500 |    6.82 |             6.07 |       5.20 |              5.48 |      5.85 |
+| fg-green          | #226700 |    5.89 |             5.25 |       4.50 |              4.74 |      5.05 |
+| fg-yellow         | #595000 |    6.89 |             6.14 |       5.26 |              5.54 |      5.91 |
+| fg-blue           | #103077 |   10.36 |             9.23 |       7.91 |              8.33 |      8.88 |
+| fg-magenta        | #700054 |    9.75 |             8.69 |       7.45 |              7.85 |      8.37 |
+| fg-cyan           | #005460 |    7.27 |             6.48 |       5.55 |              5.85 |      6.24 |
 #+TBLFM: $3='(Λ $2 @2$3);%.2f :: $4='(Λ $2 @2$4);%.2f :: $5='(Λ $2 @2$5);%.2f :: $6='(Λ $2 @2$6);%.2f :: $7='(Λ $2 @2$7);%.2f
 
 ** Doric Oak
@@ -486,6 +551,28 @@ C1 and C2 are color values written in hexadecimal RGB."
 | fg-blue           | #9fbfe7 |    6.93 |             5.51 |       4.23 |              4.71 |      4.87 |
 | fg-magenta        | #e9acbf |    6.95 |             5.52 |       4.24 |              4.73 |      4.89 |
 | fg-cyan           | #a0c0d0 |    6.85 |             5.44 |       4.18 |              4.65 |      4.81 |
+#+TBLFM: $3='(Λ $2 @2$3);%.2f :: $4='(Λ $2 @2$4);%.2f :: $5='(Λ $2 @2$5);%.2f :: $6='(Λ $2 @2$6);%.2f :: $7='(Λ $2 @2$7);%.2f
+
+** Doric Mountain
+:PROPERTIES:
+:CUSTOM_ID: h:doric-mountain
+:END:
+
+|                   |         | bg-main | bg-shadow-subtle | bg-neutral | bg-shadow-intense | bg-accent |
+| Name              |         | #383025 |          #514b44 |    #61574e |           #6c5a49 |   #4c553a |
+|-------------------+---------+---------+------------------+------------+-------------------+-----------|
+| fg-main           | #e5daa0 |    9.19 |             6.09 |       4.99 |              4.65 |      5.57 |
+| fg-shadow-subtle  | #c8b9ad |    6.80 |             4.51 |       3.69 |              3.44 |      4.12 |
+| fg-neutral        | #d2d0ba |    8.33 |             5.52 |       4.52 |              4.21 |      5.05 |
+| fg-shadow-intense | #f0d080 |    8.68 |             5.75 |       4.71 |              4.39 |      5.26 |
+| fg-accent         | #bdd487 |    7.99 |             5.30 |       4.34 |              4.05 |      4.85 |
+|-------------------+---------+---------+------------------+------------+-------------------+-----------|
+| fg-red            | #e0a47f |    6.05 |             4.01 |       3.28 |              3.06 |      3.67 |
+| fg-green          | #a0c080 |    6.40 |             4.24 |       3.47 |              3.24 |      3.88 |
+| fg-yellow         | #b9b56f |    6.12 |             4.06 |       3.32 |              3.10 |      3.71 |
+| fg-blue           | #a0b0eb |    6.12 |             4.06 |       3.32 |              3.10 |      3.71 |
+| fg-magenta        | #d2a2c0 |    5.98 |             3.96 |       3.24 |              3.03 |      3.62 |
+| fg-cyan           | #9bc3c3 |    6.79 |             4.50 |       3.69 |              3.44 |      4.12 |
 #+TBLFM: $3='(Λ $2 @2$3);%.2f :: $4='(Λ $2 @2$4);%.2f :: $5='(Λ $2 @2$5);%.2f :: $6='(Λ $2 @2$6);%.2f :: $7='(Λ $2 @2$7);%.2f
 
 ** Doric Obsidian
